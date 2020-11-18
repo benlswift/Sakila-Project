@@ -5,6 +5,8 @@
     <title>Film Info</title>
 </head>
 <body>
+<div th:include="fragments/header :: header"> header not found</div>
+
 <h1 style="text-align: center" th:action="${info}" th:text="${info.title}"></h1>
 <table>
         <tr >
