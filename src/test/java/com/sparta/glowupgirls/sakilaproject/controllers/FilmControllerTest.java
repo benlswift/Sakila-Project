@@ -1,6 +1,7 @@
 package com.sparta.glowupgirls.sakilaproject.controllers;
 
 
+import com.sparta.glowupgirls.sakilaproject.services.FilmService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ class FilmControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private FilmService filmService;
     @Test
     void actorControllerTest() {
         Assertions.assertNotNull(filmController);
@@ -31,5 +33,10 @@ class FilmControllerTest {
     @Test
     public void getActors() throws Exception{
         this.mockMvc.perform(get("/films")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("films", "allFilms"));
+    }
+
+    @Test
+    public void availableTest() {
+        Assertions.assertEquals(true,filmService.isAvailable(1));
     }
 }

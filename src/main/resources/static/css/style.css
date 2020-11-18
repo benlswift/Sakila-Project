@@ -50,3 +50,16 @@ body {
         vertical-align: middle;
     }
 }
+.availableFilter{
+    padding-top: 60px;
+}
+
+.films{
+    color: black;
+    padding-top: 50px;
+}
+
+.filmInfo{
+    color: black;
+    padding-top: 50px;
+}
