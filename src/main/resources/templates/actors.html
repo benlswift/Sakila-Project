@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:include="fragments/header :: header">Error Loading Header</div>
+<div class="content">
+    <form class="filter" action="/actors">
+        <table>
+            <tr>
+                <td>
+                    <label>Filter:</label>
+                </td>
+                <td>
+                    <select name="filter">
+                        <option>Filler</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="submit" value="Filter">
+                </td>
+            </tr>
+        </table>
+    </form>
+<div class="actor-container">
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Last Updated</th>
+        </tr>
+        <tr th:each="actor: ${actorList}">
+            <td th:text="${actor.getFirstName()}"></td>
+            <td th:text="${actor.getLastName()}"></td>
+            <td th:text="${actor.getLastUpdate()}"></td>
+        </tr>
+    </table>
+</div>
+</div>
+<div th:include="fragments/footer :: footer">Error Loading Footer</div>
+</body>
+</html>
