@@ -31,13 +31,13 @@
  - Fixed CSS styling
  - Added filter by availability
   
- ## Stop
+ ### Stop
  - 
  
- ## Start
+ ### Start
  - 
  
- ## Continue
+ ### Continue
  - Working on classes/pages you were assigned to avoid merge conflicts 
  - Having catch ups to look through what people have done
  - Bringing any issues you have so that someone can help when they are available 
