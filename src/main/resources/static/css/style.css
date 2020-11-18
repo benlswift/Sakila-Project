@@ -39,6 +39,14 @@ body {
     font-weight: bold;
 }
 
+.filter {
+
+}
+
+.actor-table {
+
+}
+
 @media (min-width: 768px) {
     /* Pull out the header and footer */
     .masthead {
@@ -50,3 +58,4 @@ body {
         vertical-align: middle;
     }
 }
+
