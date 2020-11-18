@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Films</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/headerStyles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div th:include="fragments/header :: header"> header not found</div>
-<h1 style="text-align: center">BROWSE OUR FILMS</h1>
+<h1 style="text-align: center;color: black" >BROWSE OUR FILMS</h1>
 
-<form class="filter" action="/films">
+<form class="availableFilter" action="/films">
     <table>
         <tr>
             <td>
-                <label>Filter:</label>
-            </td>
-            <td>
                 <select name="filter">
                     <option>No Filter</option>
-                    <option th:each="film: ${allFilms}" th:text="${film.getTitle()}">
+                    <option th:text="Available">
                 </select>
             </td>
             <td>
@@ -26,14 +26,17 @@
         </tr>
     </table>
 </form>
+<div class="films">
 <table>
     <tr th:each="film: ${films}">
         <td>
-        <a th:href="${film.filmId}" th:text="${film.title}">Film</a>
+        <a th:href="${film.filmId}" style="color: black" th:text="${film.title}">Film</a>
         </td>
         <td th:text="${film.description}" th:action="${film.filmId}">Film Info</td>
+        <td th:if="${availableFilms.contains(film)}">Available</td>
     </tr>
 </table>
+</div>
 
 </body>
 </html>

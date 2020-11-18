@@ -1,6 +1,8 @@
 package com.sparta.glowupgirls.sakilaproject.controllers;
 
+import com.sparta.glowupgirls.sakilaproject.entities.Actor;
 import com.sparta.glowupgirls.sakilaproject.entities.Film;
+import com.sparta.glowupgirls.sakilaproject.services.FilmActorService;
 import com.sparta.glowupgirls.sakilaproject.services.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,12 @@ import java.util.List;
 @Controller
 public class FilmController {
     private FilmService filmService;
+    private FilmActorService filmActorService;
 
 
     @Autowired
-    public FilmController(FilmService filmService) {
+    public FilmController(FilmService filmService, FilmActorService filmActorService) {
+        this.filmService = filmService;
         this.filmService = filmService;
     }
 
@@ -27,13 +31,15 @@ public class FilmController {
     public String getFilms(ModelMap modelMap, @RequestParam(value = "filter", defaultValue = "No Filter") String filter) {
         List<Film> films;
         List<Film> allFilms;
+        List<Film> availableFilms = filmService.getAvailableFilms();
         if (filter.equals("No Filter")){
             films = filmService.getFilms();
         }
         else {
-            films = filmService.getFilmByTitle(filter);
+            films = filmService.getAvailableFilms();
         }
         allFilms = filmService.getFilms();
+        modelMap.addAttribute("availableFilms", availableFilms);
         modelMap.addAttribute("allFilms", allFilms);
         modelMap.addAttribute("films",films);
         return "films";
