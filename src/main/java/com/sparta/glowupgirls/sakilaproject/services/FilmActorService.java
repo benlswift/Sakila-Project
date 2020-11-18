@@ -1,5 +1,6 @@
 package com.sparta.glowupgirls.sakilaproject.services;
 
+
 import com.sparta.glowupgirls.sakilaproject.entities.Actor;
 import com.sparta.glowupgirls.sakilaproject.entities.Film;
 import com.sparta.glowupgirls.sakilaproject.entities.FilmActor;
@@ -14,6 +15,8 @@ import java.util.List;
 public class FilmActorService {
 
     private FilmActorRepositories filmActorRepositories;
+
+
     private FilmService filmService;
     private ActorService actorService;
 
@@ -21,6 +24,9 @@ public class FilmActorService {
         this.filmActorRepositories = filmActorRepositories;
         this.filmService = filmService;
         this.actorService = actorService;
+    }
+      public List<FilmActor> getFilmActorsByActorId(Integer id) {
+        return filmActorRepositories.getFilmActorsByActorId(id);
     }
 
     public List<Film> getFilmByActor(){

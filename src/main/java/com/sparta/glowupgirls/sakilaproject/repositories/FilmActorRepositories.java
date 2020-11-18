@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface FilmActorRepositories extends CrudRepository<FilmActor, FilmActorPK> {
-    @Override
-    List<FilmActor> findAll();
+    List<FilmActor> getFilmActorsByActorId(Integer actorID);
 }

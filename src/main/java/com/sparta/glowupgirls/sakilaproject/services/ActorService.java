@@ -29,4 +29,10 @@ public class ActorService {
     public List<Actor> getActorsByFirstNameAndLastName(String fname, String lname) {
         return actorRepositories.findActorsByFirstNameAndLastName(fname, lname);
     }
+
+    public Actor getActorById(int id) {
+        if (actorRepositories.findById(id).isPresent())
+            return actorRepositories.findById(id).get();
+        return null;
+    }
 }
