@@ -15,7 +15,12 @@
                 </td>
                 <td>
                     <select name="filter">
-                        <option>Filler</option>
+                        <option>No Filter</option>
+                        <option th:each="actor: ${allActors}" th:text="${actor.getFirstName()}">
+                    </select>
+                    <select name="filter2">
+                        <option>No Filter</option>
+                        <option th:each="actor: ${allActors}" th:text="${actor.getLastName()}">
                     </select>
                 </td>
                 <td>
@@ -31,7 +36,7 @@
             <th>Last Name</th>
             <th>Last Updated</th>
         </tr>
-        <tr th:each="actor: ${actorList}">
+        <tr th:each="actor: ${actors}">
             <td th:text="${actor.getFirstName()}"></td>
             <td th:text="${actor.getLastName()}"></td>
             <td th:text="${actor.getLastUpdate()}"></td>

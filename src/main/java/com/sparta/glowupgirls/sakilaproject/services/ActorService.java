@@ -18,4 +18,15 @@ public class ActorService {
     public List<Actor> getAllActors() {
         return (List<Actor>) actorRepositories.findAll();
     }
+
+    public List<Actor> getActorsByFirstName(String fname) {
+        return (List<Actor>) actorRepositories.findActorsByFirstName(fname);
+    }
+    public List<Actor> getActorsByLastName(String lname) {
+        return (List<Actor>) actorRepositories.findActorsByLastName(lname);
+    }
+
+    public List<Actor> getActorsByFirstNameAndLastName(String fname, String lname) {
+        return actorRepositories.findActorsByFirstNameAndLastName(fname, lname);
+    }
 }
