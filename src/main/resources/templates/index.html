@@ -2,13 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>HomePage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/headerStyles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:include="fragments/header"></div>
-<div class="contents">
+<div th:include="fragments/header :: header"> header not found</div>
 
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="container">
+            <div class="inner cover">
+                <h1 class="cover-heading">Welcome to the "name to be confirmed" movie rental site</h1>
+                <p class="lead">This movie rental website allows you to view information about films and actors and potentially purchase them</p>
+                <p class="lead">
+                    <a href="#" class="">Logout</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div th:include="fragments/footer"></div>
 
 </body>

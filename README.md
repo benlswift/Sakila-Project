@@ -1,6 +1,6 @@
-#Sakila Database Movie Rental Project
+# Sakila Database Movie Rental Project
 
-##Sprint 0 - Planning 
+## Sprint 0 - Planning 
  - Populated product backlog with user  stories based on client specifications
  - Added acceptance criteria to each user story
  - Assigned priority to user stories
