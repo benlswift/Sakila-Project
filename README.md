@@ -22,3 +22,24 @@
  - Working on classes/pages you were assigned to avoid merge conflicts 
  - Having catch ups to look through what people have done
  - Bringing any issues you have so that someone can help when they are available 
+ 
+ ## Sprint 2
+ - Added film availability
+ - Started creating login page
+ - Added customer account page
+ - Added page of films actor is in
+ - Fixed CSS styling
+ - Added filter by availability
+  
+ ## Stop
+ - 
+ 
+ ## Start
+ - 
+ 
+ ## Continue
+ - Working on classes/pages you were assigned to avoid merge conflicts 
+ - Having catch ups to look through what people have done
+ - Bringing any issues you have so that someone can help when they are available 
+ - Building tests during development
+ 
