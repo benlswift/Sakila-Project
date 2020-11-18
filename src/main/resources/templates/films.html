@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Films</title>
+</head>
+<body>
+<div th:include="fragments/header :: header"> header not found</div>
+<h1 style="text-align: center">BROWSE OUR FILMS</h1>
+
+<form class="filter" action="/films">
+    <table>
+        <tr>
+            <td>
+                <label>Filter:</label>
+            </td>
+            <td>
+                <select name="filter">
+                    <option>No Filter</option>
+                    <option th:each="film: ${allFilms}" th:text="${film.getTitle()}">
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Filter">
+            </td>
+        </tr>
+    </table>
+</form>
+<table>
+    <tr th:each="film: ${films}">
+        <td>
+        <a th:href="${film.filmId}" th:text="${film.title}">Film</a>
+        </td>
+        <td th:text="${film.description}" th:action="${film.filmId}">Film Info</td>
+    </tr>
+</table>
+
+</body>
+</html>
