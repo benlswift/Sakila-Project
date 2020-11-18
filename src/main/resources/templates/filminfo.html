@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Film Info</title>
+</head>
+<body>
+<h1 style="text-align: center" th:action="${info}" th:text="${info.title}"></h1>
+<table>
+        <tr >
+            <td style="font-weight: bold ">Description</td>
+            <td th:text="${info.description}">Film Info</td>
+        </tr>
+        <tr >
+            <td style="font-weight: bold ">Release Year</td>
+            <td th:text="${info.releaseYear}">Film Info</td>
+        </tr>
+    <tr >
+        <td style="font-weight: bold ">Rental Duration</td>
+        <td th:text="${info.rentalDuration}">Film Info</td>
+    </tr>
+    <tr >
+        <td style="font-weight: bold ">Rental Cost</td>
+        <td th:text="${info.rentalRate}">Film Info</td>
+    </tr>
+    </table>
+</body>
+</html>
