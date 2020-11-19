@@ -20,4 +20,10 @@ public class InventoryService {
     public List<Inventory> getInventory() {
         return (List<Inventory>) inventoryRepositories.findAll();
     }
+
+    public Inventory findInventoryByInventoryID(Integer invID) {
+        if (inventoryRepositories.findById(invID).isPresent())
+            return inventoryRepositories.findById(invID).get();
+        return null;
+    }
 }
