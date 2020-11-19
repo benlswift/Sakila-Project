@@ -20,4 +20,8 @@ public class InventoryService {
     public List<Inventory> getInventory() {
         return (List<Inventory>) inventoryRepositories.findAll();
     }
+
+    public void deleteInventoryItem(int inventoryId){
+        inventoryRepositories.deleteById(inventoryId);
+    }
 }
