@@ -26,14 +26,7 @@ public class CustomerService  {
     }
 
     @Transactional
-    public void createCustomer(String email, String fname, String lname) {
-        Customer customer = new Customer();
-        customer.setActive((byte) 1);
-        customer.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
-        customer.setEmail(email);
-        customer.setFirstName(fname);
-        customer.setLastName(lname);
-        customer.setLastUpdate(Timestamp.valueOf(LocalDateTime.now()));
+    public void createCustomer(Customer customer) {
         customerRepositories.save(customer);
     }
 }

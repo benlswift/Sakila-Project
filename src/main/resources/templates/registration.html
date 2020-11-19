@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div th:include="fragments/header :: header">header not found</div>
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
         <div class="content">
@@ -16,8 +17,8 @@
                 <h1 class="display-4" th:text="'Create Customer Account'"></h1>
             </div>
             <p th:if="${error}" class="error">User already exists.</p>
+            <p th:if="${passed}" class="alert-success">User successfully added.</p>
             <form class="form-group" action="#" th:action="@{/registration}" th:object="${customer}" method="post">
-
                 <p>Email: <input type="text" th:field="*{email}" class="form-control"></p>
                 <p>First Name: <input type="text" th:field="*{firstName}" class="form-control"></p>
                 <p>Last Name: <input type="text" th:field="*{lastName}" class="form-control"></p>
@@ -26,5 +27,6 @@
         </div>
     </div>
 </div>
+<div th:include="fragments/footer :: footer">Footer not found.</div>
 </body>
 </html>

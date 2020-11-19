@@ -9,12 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <div th:include="fragments/header :: admin-header"> header not found</div>
-</div>
-<div sec:authorize="hasRole('ROLE_USER')">
-    <div th:include="fragments/header :: header"> header not found</div>
-</div>
+<div th:include="fragments/header :: header"> header not found</div>
 
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
