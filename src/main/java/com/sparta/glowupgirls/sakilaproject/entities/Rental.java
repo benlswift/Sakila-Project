@@ -1,9 +1,6 @@
 package com.sparta.glowupgirls.sakilaproject.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -15,9 +12,11 @@ public class Rental {
     private Integer customerId;
     private Timestamp returnDate;
     private Timestamp lastUpdate;
+    private Integer staffId;
 
     @Id
     @Column(name = "rental_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getRentalId() {
         return rentalId;
     }
@@ -74,6 +73,16 @@ public class Rental {
 
     public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @Basic
+    @Column(name = "staff_id")
+    public Integer getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
     }
 
     @Override
