@@ -19,6 +19,8 @@ public class Staff {
     private String username;
     private String password;
     private Timestamp lastUpdate;
+    private Integer storeId;
+    private Integer addressId;
 
     @Id
     @Column(name = "staff_id")
@@ -110,6 +112,26 @@ public class Staff {
         this.lastUpdate = lastUpdate;
     }
 
+    @Basic
+    @Column(name = "store_id")
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    @Basic
+    @Column(name = "address_id")
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,13 +145,17 @@ public class Staff {
                 Objects.equals(email, staff.email) &&
                 Objects.equals(username, staff.username) &&
                 Objects.equals(password, staff.password) &&
-                Objects.equals(lastUpdate, staff.lastUpdate);
+                Objects.equals(lastUpdate, staff.lastUpdate) &&
+                Objects.equals(storeId, staff.storeId) &&
+                Objects.equals(addressId, staff.addressId);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(staffId, firstName, lastName, email, active, username, password, lastUpdate);
+        int result = Objects.hash(staffId, firstName, lastName, email, active, username, password, lastUpdate, storeId, addressId);
         result = 31 * result + Arrays.hashCode(picture);
         return result;
     }
+
+
 }
