@@ -33,8 +33,12 @@ class FilmControllerTest {
 
     @Test
     @WithMockUser(username ="user1" , password = "pwd",roles = "USER")
-    public void getActors() throws Exception{
+    public void getFilms() throws Exception{
         this.mockMvc.perform(get("/films")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("films", "allFilms"));
+    }
+    @Test
+    public void rentFilmTest() throws Exception{
+        this.mockMvc.perform(get("/rent/1/1")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("rent", "Rented"));
     }
 
     @Test
