@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,12 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:include="fragments/header :: header"> header not found</div>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <div th:include="fragments/header :: admin-header"> header not found</div>
+</div>
+<div sec:authorize="hasRole('ROLE_USER')">
+    <div th:include="fragments/header :: header"> header not found</div>
+</div>
 
 <div class="site-wrapper">
     <div class="site-wrapper-inner">
