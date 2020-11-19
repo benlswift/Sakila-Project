@@ -7,25 +7,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class AccountControllerTest {
+public class LoginCotrollerTest {
 
     @Autowired
-    private AccountController accountController;
+    private LoginController loginController;
 
     @Autowired
     private MockMvc mockMvc;
 
+
     @Test
     @WithMockUser(username ="user1" , password = "pwd",roles = "USER")
-    void currentUser() throws Exception {
-        mockMvc.perform(get("/account")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists());
+    public void mytest1 () throws Exception {
+        mockMvc.perform(get("/login")).andExpect(status().isOk());
+
     }
+
+
 
 
 }
