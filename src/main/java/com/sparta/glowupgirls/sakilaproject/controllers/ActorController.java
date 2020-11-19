@@ -12,8 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +51,7 @@ public class ActorController {
         List<FilmActor> filmActors = filmActorService.getFilmActorsByActorId(id);
         List<Film> films = new ArrayList<>();
         for (FilmActor filmActor : filmActors) {
-            Film film = filmService.getFilmByID(filmActor.getFilmId());;
+            Film film = filmService.getFilmByID(filmActor.getFilmId());
             films.add(film);
         }
         modelMap.addAttribute("actor", actor);

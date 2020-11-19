@@ -36,7 +36,7 @@
                 </tr>
                 <tr th:each="actor: ${actors}">
                     <td >
-                        <a th:text="${actor.getFirstName().concat(' ' + actor.getLastName())}" th:href="@{/actors/{id}(id=${actor.actorId})}"></a>
+                        <a th:text="${actor.getFirstName().substring(0,1).concat(actor.getFirstName().substring(1).toLowerCase() + ' ' + actor.getLastName().substring(0,1) + actor.getLastName().substring(1).toLowerCase())}" th:href="@{/actors/{id}(id=${actor.actorId})}"></a>
                     </td>
                     <td th:text="${actor.getLastUpdate()}"></td>
                 </tr>
