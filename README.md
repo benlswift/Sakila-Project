@@ -48,3 +48,20 @@
  - started rent film functionality
  - styled films and film info pages
  - created view order details page
+ 
+ ## Sprint 4 (Thursday Afternoon)
+ - added film renting
+ - guest logins
+ - adding new user accounts
+ - added & fixed tests
+ 
+  ### Stop
+ - overestimating sprint lengths
+ 
+ ### Start
+ - planning sprints better
+ 
+ ### Continue
+- working well as a team
+- using Git well
+- Bringing any issues you have so that someone can help when they are available 
