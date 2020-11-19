@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 public class Rental {
-    private Integer rentalId;
+    private int rentalId;
     private Timestamp rentalDate;
     private Integer inventoryId;
     private Integer customerId;
