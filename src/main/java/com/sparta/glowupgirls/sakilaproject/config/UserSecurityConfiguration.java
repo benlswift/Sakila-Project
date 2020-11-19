@@ -20,6 +20,7 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/css/**").permitAll();
         http
                 .authorizeRequests()
                 .antMatchers("/resources/**")
