@@ -1,6 +1,7 @@
 package com.sparta.glowupgirls.sakilaproject.services;
 
 import com.sparta.glowupgirls.sakilaproject.entities.Customer;
+import com.sparta.glowupgirls.sakilaproject.entities.Guest;
 import com.sparta.glowupgirls.sakilaproject.entities.Staff;
 import com.sparta.glowupgirls.sakilaproject.repositories.CustomerRepositories;
 import com.sparta.glowupgirls.sakilaproject.repositories.StaffRepository;
@@ -23,23 +24,31 @@ public class myUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         Customer customer = customerRepositories.findCustomerByEmail(username);
         Staff staff = staffRepository.findStaffByUsername(username);
 
-        if (customer == null&& staff ==null) {
-            throw new UsernameNotFoundException("Could not find user");
+        if (customer == null && staff ==null) {
+            Guest guest = new Guest();
+            User.UserBuilder builder = null;
+            builder = org.springframework.security.core.userdetails.User.withUsername(guest.getUsername());
+            builder.password(new BCryptPasswordEncoder().encode(guest.getPassword()));
+            builder.roles("GUEST");
+            return builder.build();
         } else if (customer!= null) {
             User.UserBuilder builder = null;
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(new BCryptPasswordEncoder().encode((customer.getFirstName() + customer.getLastName()).toLowerCase()));
             builder.roles("USER");
             return builder.build();
-        } else {
+        } else if (staff!= null){
             User.UserBuilder builder = null;
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(new BCryptPasswordEncoder().encode(staff.getPassword()));
             builder.roles("ADMIN");
             return builder.build();
+        } else {
+            throw new UsernameNotFoundException("Could not find user");
         }
     }
 
