@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Film Info</title>
@@ -48,7 +48,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="rentButton">
+            <div sec:authorize="hasRole('ROLE_USER')" class="rentButton">
             <form th:if="${availability == true}" th:action="@{/rent/{id}/{customer}(id=${info.filmId},customer=${user.customerId})}">
                 <input class="btn-dark btn-lg" type="submit" value="Rent Film" />
             </form>
