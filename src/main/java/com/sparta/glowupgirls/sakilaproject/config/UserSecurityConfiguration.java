@@ -1,5 +1,6 @@
 package com.sparta.glowupgirls.sakilaproject.config;
 
+import com.sparta.glowupgirls.sakilaproject.services.MyStaffDetailsService;
 import com.sparta.glowupgirls.sakilaproject.services.myUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,9 +30,12 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .logout()
+                .logout() .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
 
@@ -38,6 +43,7 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return new myUserDetailsServiceImpl();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -56,4 +62,5 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
 }

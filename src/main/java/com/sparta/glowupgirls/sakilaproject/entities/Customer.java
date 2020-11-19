@@ -1,23 +1,23 @@
 package com.sparta.glowupgirls.sakilaproject.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 public class Customer {
     private Integer customerId;
+    private Integer storeId;
     private String firstName;
     private String lastName;
     private String email;
+    private Integer addressId;
     private byte active;
     private Timestamp createDate;
     private Timestamp lastUpdate;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     public Integer getCustomerId() {
         return customerId;
@@ -25,6 +25,16 @@ public class Customer {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    @Basic
+    @Column(name = "store_id")
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
     @Basic
@@ -55,6 +65,16 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Basic
+    @Column(name = "address_id")
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     @Basic
@@ -94,15 +114,17 @@ public class Customer {
         Customer customer = (Customer) o;
         return active == customer.active &&
                 Objects.equals(customerId, customer.customerId) &&
+                Objects.equals(storeId, customer.storeId) &&
                 Objects.equals(firstName, customer.firstName) &&
                 Objects.equals(lastName, customer.lastName) &&
                 Objects.equals(email, customer.email) &&
+                Objects.equals(addressId, customer.addressId) &&
                 Objects.equals(createDate, customer.createDate) &&
                 Objects.equals(lastUpdate, customer.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, email, active, createDate, lastUpdate);
+        return Objects.hash(customerId, storeId, firstName, lastName, email, addressId, active, createDate, lastUpdate);
     }
 }

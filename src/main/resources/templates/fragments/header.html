@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -16,26 +16,13 @@
                     <li class="active"> <a href="/">Home</a> </li>
                     <li> <a href="/actors">Actors</a> </li>
                     <li><a href="/films">Films</a></li>
+                    <li sec:authorize="hasRole('ROLE_USER')"><a href="/account">Your account</a> </li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/registration">Registration</a> </li>
                 </ul>
             </nav>
         </div>
     </div>
 </div>
 
-<div th:fragment="admin-header">
-    <div class="masthead clearfix">
-        <div class="container inner">
-            <h3 class="masthead-brand">Name of website</h3>
-            <nav>
-                <ul class="nav masthead-nav">
-                    <li class="active"> <a href="#">Home</a> </li>
-                    <li> <a href="actors.html">Actors</a> </li>
-                    <li><a href="films.html">Films</a></li>
-                    <li><a href="registration.html">Films</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
 </body>
 </html>

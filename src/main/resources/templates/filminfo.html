@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Film Info</title>
@@ -10,38 +10,53 @@
 <body>
 <div th:include="fragments/header :: header"> header not found</div>
 
-<h1 style="text-align: center;color: black" th:action="${info}" th:text="${info.title}"></h1>
-<div class="filmInfo">
-<table>
-        <tr >
-            <td style="font-weight: bold ">Description</td>
-            <td th:text="${info.description}">Film Info</td>
-        </tr>
-        <tr >
-            <td style="font-weight: bold ">Release Year</td>
-            <td th:text="${#strings.toString(info.releaseYear).substring(0,4)}">Film Info</td>
-        </tr>
-    <tr >
-        <td style="font-weight: bold ">Rental Duration</td>
-        <td th:text="${info.rentalDuration } + ' days'" >Film Info</td>
-    </tr>
-    <tr >
-        <td style="font-weight: bold ">Rental Cost</td>
-        <td th:text="'£'+${info.rentalRate}">Film Info</td>
-    </tr>
-    <tr >
-        <td style="font-weight: bold ">Length</td>
-        <td th:text="${info.length} + ' minutes'">Film Info</td>
-    </tr>
-    <tr >
-        <td style="font-weight: bold ">Age Rating</td>
-        <td th:text="${info.rating}">Film Info</td>
-    </tr>
-    <tr >
-        <td style="font-weight: bold ">Special Features</td>
-        <td th:text="${info.specialFeatures}">Film Info</td>
-    </tr>
-    </table>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="content">
+            <div class="jumbotron">
+                <h1 class="display-4" th:action="${info}" th:text="${info.title}"></h1>
+            </div>
+            <div class="filmInfo">
+                <table class="table table-dark table-bordered">
+                    <tr >
+                        <td style="font-weight: bold ">Description</td>
+                        <td th:text="${info.description}">Film Info</td>
+                    </tr>
+                    <tr >
+                        <td style="font-weight: bold ">Release Year</td>
+                        <td th:text="${#strings.toString(info.releaseYear).substring(0,4)}">Film Info</td>
+                    </tr>
+                    <tr >
+                        <td style="font-weight: bold ">Rental Duration</td>
+                        <td th:text="${info.rentalDuration } + ' days'" >Film Info</td>
+                    </tr>
+                    <tr >
+                        <td style="font-weight: bold ">Rental Cost</td>
+                        <td th:text="'£'+${info.rentalRate}">Film Info</td>
+                    </tr>
+                    <tr >
+                        <td style="font-weight: bold ">Length</td>
+                        <td th:text="${info.length} + ' minutes'">Film Info</td>
+                    </tr>
+                    <tr >
+                        <td style="font-weight: bold ">Age Rating</td>
+                        <td th:text="${info.rating}">Film Info</td>
+                    </tr>
+                    <tr >
+                        <td style="font-weight: bold ">Special Features</td>
+                        <td th:text="${info.specialFeatures}">Film Info</td>
+                    </tr>
+                </table>
+            </div>
+            <div sec:authorize="hasRole('ROLE_USER')" class="rentButton">
+            <form th:if="${availability == true}" th:action="@{/rent/{id}/{customer}(id=${info.filmId},customer=${user.customerId})}">
+                <input class="btn-dark btn-lg" type="submit" value="Rent Film" />
+            </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 </body>
 </html>

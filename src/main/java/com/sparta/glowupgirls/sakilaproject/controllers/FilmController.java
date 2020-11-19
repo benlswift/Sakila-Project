@@ -1,9 +1,9 @@
 package com.sparta.glowupgirls.sakilaproject.controllers;
 
-import com.sparta.glowupgirls.sakilaproject.entities.Actor;
+import com.sparta.glowupgirls.sakilaproject.entities.Customer;
 import com.sparta.glowupgirls.sakilaproject.entities.Film;
-import com.sparta.glowupgirls.sakilaproject.services.FilmActorService;
-import com.sparta.glowupgirls.sakilaproject.services.FilmService;
+import com.sparta.glowupgirls.sakilaproject.entities.Inventory;
+import com.sparta.glowupgirls.sakilaproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,20 +11,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.security.Principal;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 public class FilmController {
     private FilmService filmService;
     private FilmActorService filmActorService;
+    private InventoryService inventoryService;
+    private RentalService rentalService;
+    private CustomerService customerService;
 
 
     @Autowired
-    public FilmController(FilmService filmService, FilmActorService filmActorService) {
+    public FilmController(CustomerService customerService, RentalService rentalService,FilmService filmService, FilmActorService filmActorService,InventoryService inventoryService) {
         this.filmService = filmService;
-        this.filmService = filmService;
+        this.filmActorService = filmActorService;
+        this.inventoryService = inventoryService;
+        this.rentalService = rentalService;
+        this.customerService = customerService;
     }
 
     @GetMapping("/films")
@@ -45,10 +53,29 @@ public class FilmController {
         return "films";
     }
 
-    @GetMapping("/{id}")
-    public String getFilmInfo(@PathVariable int id, ModelMap modelMap) {
+    @GetMapping("/film/{id}")
+    public String getFilmInfo(@PathVariable("id") int id, ModelMap modelMap, Principal principal) {
         Film film = filmService.getFilmByID(id);
+        String name = principal.getName();
+        Customer customer = customerService.getCustomerByEmail(name);
+        modelMap.addAttribute("availability",filmService.isAvailable(id));
+        modelMap.addAttribute("user",customer);
         modelMap.addAttribute("info",film);
         return "filminfo";
+    }
+
+    @GetMapping("/rent/{filmid}/{customerid}")
+    public String rentFilm(ModelMap modelMap,@PathVariable("filmid") int filmid, @PathVariable("customerid") int customerid){
+        List<Inventory> inventoryList = inventoryService.getInventory();
+        for (Inventory inventory : inventoryList){
+            if (inventory.getFilmId().equals(filmid)){
+                LocalDateTime returnDate = LocalDateTime.now().plusDays(filmService.getFilmByID(inventory.getFilmId()).getRentalDuration());
+//                inventoryService.deleteInventoryItem(filmid);
+                rentalService.saveRental(inventory.getInventoryId(),customerid, Timestamp.valueOf(returnDate));
+                break;
+            }
+        }
+        modelMap.addAttribute("rent","Rented");
+        return "redirect:/films";
     }
 }

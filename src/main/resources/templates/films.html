@@ -9,34 +9,47 @@
 </head>
 <body>
 <div th:include="fragments/header :: header"> header not found</div>
-<h1 style="text-align: center;color: black" >BROWSE OUR FILMS</h1>
 
-<form class="availableFilter" action="/films">
-    <table>
-        <tr>
-            <td>
-                <select name="filter">
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="content">
+            <div class="jumbotron">
+                <h1 class="display-4">BROWSE OUR FILMS</h1>
+            </div>
+            <form class="form-group availableFilter" action="/films">
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <td>-->
+                <label>Filter:</label>
+                <select class="form-control" name="filter">
                     <option>No Filter</option>
                     <option th:text="Available">
                 </select>
-            </td>
-            <td>
-                <input type="submit" value="Filter">
-            </td>
-        </tr>
-    </table>
-</form>
-<div class="films">
-<table>
-    <tr th:each="film: ${films}">
-        <td>
-        <a th:href="${film.filmId}" style="color: black" th:text="${film.title}">Film</a>
-        </td>
-        <td th:text="${film.description}" th:action="${film.filmId}">Film Info</td>
-        <td th:if="${availableFilms.contains(film)}">Available</td>
-    </tr>
-</table>
+<!--                        </td>-->
+<!--                        <td>-->
+                <input class="btn-dark btn-lg" type="submit" value="Filter">
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+            </form>
+            <div class="films">
+                <table class="table table-dark table-bordered">
+                    <tr th:each="film: ${films}">
+                        <td>
+                            <a th:href="${'film/' + film.filmId}" th:text="${film.title}">Film</a>
+                        </td>
+                        <td th:text="${film.description}" th:action="${film.filmId}">Film Info</td>
+                        <td th:if="${availableFilms.contains(film)}">Available</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!--<h1 style="text-align: center;color: black" >BROWSE OUR FILMS</h1>-->
+
+
 
 </body>
 </html>

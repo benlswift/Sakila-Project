@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Service
 public class CustomerService  {
@@ -21,4 +25,8 @@ public class CustomerService  {
         return customerRepositories.findCustomerByEmail(email);
     }
 
+    @Transactional
+    public void createCustomer(Customer customer) {
+        customerRepositories.save(customer);
+    }
 }

@@ -1,26 +1,27 @@
 package com.sparta.glowupgirls.sakilaproject.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 public class Rental {
-    private Integer rentalId;
+    private int rentalId;
     private Timestamp rentalDate;
+    private Integer inventoryId;
+    private Integer customerId;
     private Timestamp returnDate;
     private Timestamp lastUpdate;
+    private Integer staffId;
 
     @Id
     @Column(name = "rental_id")
-    public int getRentalId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getRentalId() {
         return rentalId;
     }
 
-    public void setRentalId(int rentalId) {
+    public void setRentalId(Integer rentalId) {
         this.rentalId = rentalId;
     }
 
@@ -32,6 +33,26 @@ public class Rental {
 
     public void setRentalDate(Timestamp rentalDate) {
         this.rentalDate = rentalDate;
+    }
+
+    @Basic
+    @Column(name = "inventory_id")
+    public Integer getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(Integer inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
+    @Basic
+    @Column(name = "customer_id")
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     @Basic
@@ -54,19 +75,31 @@ public class Rental {
         this.lastUpdate = lastUpdate;
     }
 
+    @Basic
+    @Column(name = "staff_id")
+    public Integer getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rental rental = (Rental) o;
-        return rentalId == rental.rentalId &&
+        return Objects.equals(rentalId, rental.rentalId) &&
                 Objects.equals(rentalDate, rental.rentalDate) &&
+                Objects.equals(inventoryId, rental.inventoryId) &&
+                Objects.equals(customerId, rental.customerId) &&
                 Objects.equals(returnDate, rental.returnDate) &&
                 Objects.equals(lastUpdate, rental.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rentalId, rentalDate, returnDate, lastUpdate);
+        return Objects.hash(rentalId, rentalDate, inventoryId, customerId, returnDate, lastUpdate);
     }
 }

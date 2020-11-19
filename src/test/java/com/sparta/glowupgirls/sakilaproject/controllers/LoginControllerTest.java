@@ -1,8 +1,5 @@
 package com.sparta.glowupgirls.sakilaproject.controllers;
 
-
-import com.sparta.glowupgirls.sakilaproject.services.FilmService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,32 +14,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class FilmControllerTest {
+public class LoginControllerTest {
 
     @Autowired
-    private FilmController filmController;
+    private LoginController loginController;
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private FilmService filmService;
-    @Test
-    void actorControllerTest() {
-        Assertions.assertNotNull(filmController);
-    }
+
 
     @Test
     @WithMockUser(username ="user1" , password = "pwd",roles = "USER")
-    public void getFilms() throws Exception{
-        this.mockMvc.perform(get("/films")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("films", "allFilms"));
-    }
-    @Test
-    public void rentFilmTest() throws Exception{
-        this.mockMvc.perform(get("/rent/1/1")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("rent", "Rented"));
+    public void mytest1 () throws Exception {
+        mockMvc.perform(get("/login")).andExpect(status().isOk());
+
     }
 
-    @Test
-    public void availableTest() {
-        Assertions.assertEquals(true,filmService.isAvailable(1));
-    }
 }
