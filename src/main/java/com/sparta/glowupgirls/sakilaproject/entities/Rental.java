@@ -18,11 +18,11 @@ public class Rental {
 
     @Id
     @Column(name = "rental_id")
-    public int getRentalId() {
+    public Integer getRentalId() {
         return rentalId;
     }
 
-    public void setRentalId(int rentalId) {
+    public void setRentalId(Integer rentalId) {
         this.rentalId = rentalId;
     }
 
@@ -81,7 +81,7 @@ public class Rental {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rental rental = (Rental) o;
-        return rentalId == rental.rentalId &&
+        return Objects.equals(rentalId, rental.rentalId) &&
                 Objects.equals(rentalDate, rental.rentalDate) &&
                 Objects.equals(inventoryId, rental.inventoryId) &&
                 Objects.equals(customerId, rental.customerId) &&

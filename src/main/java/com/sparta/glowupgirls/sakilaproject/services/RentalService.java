@@ -3,18 +3,20 @@ package com.sparta.glowupgirls.sakilaproject.services;
 import com.sparta.glowupgirls.sakilaproject.entities.Rental;
 import com.sparta.glowupgirls.sakilaproject.repositories.RentalRepositories;
 import org.springframework.stereotype.Service;
-
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class RentalService {
+
     private RentalRepositories rentalRepositories;
 
     public RentalService(RentalRepositories rentalRepositories) {
         this.rentalRepositories = rentalRepositories;
     }
+
 
     public void saveRental(int inventoryId, int customerId, Timestamp returnDate){
         long rentalId = rentalRepositories.count();
@@ -27,5 +29,9 @@ public class RentalService {
         rental.setLastUpdate(Timestamp.valueOf(rentalDate));
         rental.setRentalDate(returnDate);
         rentalRepositories.save(rental);
+}
+    public List<Rental> findRentalsByCustomerId(Integer cid) {
+        return rentalRepositories.findRentalsByCustomerId(cid);
+
     }
 }
