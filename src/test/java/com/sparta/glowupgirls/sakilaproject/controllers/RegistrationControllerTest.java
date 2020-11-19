@@ -8,29 +8,24 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class LoginCotrollerTest {
+public class RegistrationControllerTest {
 
     @Autowired
-    private LoginController loginController;
+    private RegistrationController registrationController;
 
     @Autowired
     private MockMvc mockMvc;
 
-
     @Test
-    @WithMockUser(username ="user1" , password = "pwd",roles = "USER")
-    public void mytest1 () throws Exception {
-        mockMvc.perform(get("/login")).andExpect(status().isOk());
-
+    @WithMockUser(username ="user1" , password = "pwd",roles = "ADMIN")
+    public void registrationTest() throws Exception{
+        mockMvc.perform(get("/registration")).andExpect(status().isOk()).andExpect(model().attributeExists("customer"));
     }
-
-
 
 
 }
