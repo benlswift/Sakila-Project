@@ -9,21 +9,39 @@
 </head>
 <body>
 <div th:include="fragments/header :: header">Error loading header.</div>
-<div class="content">
-    <div class="jumbotron">
-        <h1 class="display-4" th:text="${user != null} ? ${'Welcome back, ' + (user.getFirstName().concat(' ' + user.getLastName()).toUpperCase())} : 'Welcome back, CUSTOMER'">Welcome back, CUSTOMER </h1>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="content">
+            <div class="jumbotron">
+                <h1 class="display-4" th:text="${user != null} ? ${'Welcome back, ' + (user.getFirstName().concat(' ' + user.getLastName()).toUpperCase())} : 'Welcome back, CUSTOMER'">Welcome back, CUSTOMER </h1>
+            </div>
+            <table class="table table-dark table-bordered">
+                <tr>
+                    <td  th:text="${user != null} ? ${user.getFirstName()} : 'N/A'"></td>
+                </tr>
+                <tr>
+                    <td th:text="${user != null} ? ${user.getLastName()} : 'N/A'"></td>
+                </tr>
+                <tr>
+                    <td th:text="${user != null} ? ${user.getEmail()} : 'N/A'"></td>
+                </tr>
+            </table>
+            <form class="form-group" name="orders">
+                <table class="table table-dark table-bordered">
+                    <tr>
+                        <th>Film Title</th>
+                        <th>Rental Date</th>
+                        <th>Return Date</th>
+                    </tr>
+                    <tr th:each="rental: ${rentals}">
+                        <td th:text="${rental.getFilm().getTitle()}"></td>
+                        <td th:text="${rental.getRental().getRentalDate()}"></td>
+                        <td th:text="${rental.getRental().getReturnDate()}"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
-    <table class="table">
-        <tr>
-            <td  th:text="${user != null} ? ${user.getFirstName()} : 'N/A'"></td>
-        </tr>
-        <tr>
-            <td th:text="${user != null} ? ${user.getLastName()} : 'N/A'"></td>
-        </tr>
-        <tr>
-            <td th:text="${user != null} ? ${user.getEmail()} : 'N/A'"></td>
-        </tr>
-    </table>
 </div>
 <div th:include="fragments/footer :: footer">Error loading footer</div>
 </body>
