@@ -3,46 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/headerStyles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div th:include="fragments/header :: header">Error Loading Header</div>
-<div class="content">
-    <form class="filter" action="/actors">
-        <table>
-            <tr>
-                <td>
-                    <label>Filter:</label>
-                </td>
-                <td>
-                    <select name="filter">
-                        <option>No Filter</option>
-                        <option th:each="actor: ${allActors}" th:text="${actor.getFirstName()}">
-                    </select>
-                    <select name="filter2">
-                        <option>No Filter</option>
-                        <option th:each="actor: ${allActors}" th:text="${actor.getLastName()}">
-                    </select>
-                </td>
-                <td>
-                    <input type="submit" value="Filter">
-                </td>
-            </tr>
-        </table>
-    </form>
-<div class="actor-container">
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Last Updated</th>
-        </tr>
-        <tr th:each="actor: ${actors}">
-            <td th:text="${actor.getFirstName()}"></td>
-            <td th:text="${actor.getLastName()}"></td>
-            <td th:text="${actor.getLastUpdate()}"></td>
-        </tr>
-    </table>
-</div>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="jumbotron">
+            <h1 class="display-4" th:text="Actors"> </h1>
+        </div>
+        <div class="filter">
+            <form class="form-group" action="/actors">
+                <label>Filter:</label>
+                <select class="form-control" name="filter">
+                    <option>No Filter</option>
+                    <option th:each="actor: ${allActors}" th:text="${actor.getFirstName()}">
+                </select>
+                <select class="form-control" name="filter2">
+                    <option>No Filter</option>
+                    <option th:each="actor: ${allActors}" th:text="${actor.getLastName()}">
+                </select>
+                <input class="btn-dark btn-lg" type="submit" value="Filter">
+            </form>
+        </div>
+        <div class="actor-table">
+            <table class="table table-dark table-bordered">
+                <tr>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Last Updated</th>
+                </tr>
+                <tr th:each="actor: ${actors}">
+                    <td >
+                        <a th:text="${actor.getFirstName().concat(' ' + actor.getLastName())}" th:href="@{/actors/{id}(id=${actor.actorId})}"></a>
+                    </td>
+                    <td th:text="${actor.getLastUpdate()}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 <div th:include="fragments/footer :: footer">Error Loading Footer</div>
 </body>

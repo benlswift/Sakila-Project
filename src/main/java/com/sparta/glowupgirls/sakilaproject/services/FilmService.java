@@ -1,7 +1,10 @@
 package com.sparta.glowupgirls.sakilaproject.services;
 
 import com.sparta.glowupgirls.sakilaproject.entities.Film;
+import com.sparta.glowupgirls.sakilaproject.entities.Inventory;
 import com.sparta.glowupgirls.sakilaproject.repositories.FilmRepositories;
+import com.sparta.glowupgirls.sakilaproject.repositories.InventoryRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -12,10 +15,12 @@ import java.util.List;
 public class FilmService {
 
     private FilmRepositories filmRepositories;
+    private InventoryService inventoryService;
 
-
-    public FilmService(FilmRepositories filmRepositories) {
+    @Autowired
+    public FilmService(FilmRepositories filmRepositories, InventoryService inventoryService) {
         this.filmRepositories = filmRepositories;
+        this.inventoryService = inventoryService;
     }
 
     public List<Film> getFilms() {
@@ -43,6 +48,31 @@ public class FilmService {
             }
         }
         return films;
+    }
+
+    public boolean isAvailable(int filmId){
+        List<Inventory> inventoryList = inventoryService.getInventory();
+        for (Inventory inventory : inventoryList){
+            if (inventory.getFilmId() == filmId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Film> getAvailableFilms(){
+        List<Inventory> inventoryList = inventoryService.getInventory();
+        List<Film> availableFilms = new ArrayList<>();
+        for (Film film : getFilms()){
+            for (Inventory inventory : inventoryList){
+                if (inventory.getFilmId() == film.getFilmId()){
+                    availableFilms.add(film);
+                    break;
+                }
+            }
+        }
+        return availableFilms;
+
     }
 
 

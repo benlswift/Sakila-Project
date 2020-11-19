@@ -39,6 +39,14 @@ body {
     font-weight: bold;
 }
 
+.filter {
+
+}
+
+.actor-table {
+
+}
+
 @media (min-width: 768px) {
     /* Pull out the header and footer */
     .masthead {
@@ -50,3 +58,18 @@ body {
         vertical-align: middle;
     }
 }
+
+.availableFilter{
+    padding-top: 60px;
+}
+
+.films{
+    color: black;
+    padding-top: 50px;
+}
+
+.filmInfo{
+    color: black;
+    padding-top: 50px;
+}
+

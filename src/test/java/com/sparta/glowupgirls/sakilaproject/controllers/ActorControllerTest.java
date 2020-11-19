@@ -29,5 +29,9 @@ class ActorControllerTest {
     @Test
     public void getActors() throws Exception{
         this.mockMvc.perform(get("/actors")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("actors", "allActors"));
+        this.mockMvc.perform(get("/actors?filter=No+Filter&filter2=GUINESS")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("actors", "allActors"));
+        this.mockMvc.perform(get("/actors?filter=PENELOPE&filter2=No+Filter")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("actors", "allActors"));
+        this.mockMvc.perform(get("/actors?filter=PENELOPE&filter2=GUINESS")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("actors", "allActors"));
+
     }
 }
