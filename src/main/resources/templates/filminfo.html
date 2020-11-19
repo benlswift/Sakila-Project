@@ -50,7 +50,7 @@
             </div>
             <div class="rentButton">
             <form th:if="${availability == true}" th:action="@{/rent/{id}/{customer}(id=${info.filmId},customer=${user.customerId})}">
-                <input type="submit" value="Rent Film" />
+                <input class="btn-dark btn-lg" type="submit" value="Rent Film" />
             </form>
             </div>
         </div>
