@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -31,6 +32,7 @@ class FilmControllerTest {
     }
 
     @Test
+    @WithMockUser(username ="user1" , password = "pwd",roles = "USER")
     public void getActors() throws Exception{
         this.mockMvc.perform(get("/films")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists("films", "allFilms"));
     }
