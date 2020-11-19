@@ -1,5 +1,6 @@
 package com.sparta.glowupgirls.sakilaproject.config;
 
+import com.sparta.glowupgirls.sakilaproject.services.MyStaffDetailsService;
 import com.sparta.glowupgirls.sakilaproject.services.myUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().permitAll()
                 .and()
-                .logout()
+                .logout().logoutSuccessUrl("/login")
                 .permitAll();
     }
 
@@ -38,6 +39,7 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return new myUserDetailsServiceImpl();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -56,4 +58,5 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
 }
