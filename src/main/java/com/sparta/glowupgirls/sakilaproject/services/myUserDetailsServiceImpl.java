@@ -39,13 +39,13 @@ public class myUserDetailsServiceImpl implements UserDetailsService {
             User.UserBuilder builder = null;
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(new BCryptPasswordEncoder().encode((customer.getFirstName() + customer.getLastName()).toLowerCase()));
-            builder.roles("USER");
+            builder.roles("USER","GUEST");
             return builder.build();
         } else if (staff!= null){
             User.UserBuilder builder = null;
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(new BCryptPasswordEncoder().encode(staff.getPassword()));
-            builder.roles("ADMIN");
+            builder.roles("ADMIN","USER","GUEST");
             return builder.build();
         } else {
             throw new UsernameNotFoundException("Could not find user");
