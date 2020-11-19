@@ -7,6 +7,9 @@ import com.sparta.glowupgirls.sakilaproject.services.InventoryService;
 import com.sparta.glowupgirls.sakilaproject.services.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.security.Principal;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +35,8 @@ public class AccountController {
     }
 
     @GetMapping("/account")
-    public String currentUser(ModelMap modelMap, Principal principal) {
-        String name = principal.getName();
+    public String currentUser(ModelMap modelMap, Authentication authentication) {
+        String name = authentication.getName();
         Customer customer = customerService.getCustomerByEmail(name);
         List<CustomerOrder> customerOrders = new ArrayList<>();
         if (customer != null) {
