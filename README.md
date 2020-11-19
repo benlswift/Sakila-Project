@@ -8,7 +8,7 @@
  - Populated sprint backlog for sprint 1 and assigned roles 
  - Created project skeleton for everyone to work on
  
- ## Sprint 1
+ ## Sprint 1 (Wednesday Morning)
  - Created home page with Nav bar where user can go to actors or films page 
  - Added bootstrap for styling 
  - Created films page - user can view all films or filter based on film name
@@ -23,7 +23,7 @@
  - Having catch ups to look through what people have done
  - Bringing any issues you have so that someone can help when they are available 
  
- ## Sprint 2
+ ## Sprint 2 (Wednesday Afternoon)
  - Added film availability
  - Started creating login page
  - Added customer account page
@@ -43,3 +43,8 @@
  - Bringing any issues you have so that someone can help when they are available 
  - Building tests during development
  
+ ## Sprint 3 (Thursday Morning)
+ - added admin login
+ - started rent film functionality
+ - styled films and film info pages
+ - created view order details page
