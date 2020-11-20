@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
     <title>Login</title>
 </head>
 <body>
-<div th:include="fragments/header :: header"></div>
+<!--<div th:include="fragments/header :: header"></div>-->
 <div>
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
             <div class="content">
                 <div class="jumbotron">
                     <h1 class="display-4" th:text="'Login page'">Login page</h1>
-                    <h4 class="lead">To login as a guest, please use the following credentials:</h4>
+                    <h3 class="lead">To login as a guest, please use the following credentials:</h3>
+                    <h6 class="lead">Username: guest</h6>
+                    <h6 class="lead">Password: password</h6>
                     <hr class="my-4">
-                    <p>Username: guest</p>
-                    <p>Password: password</p>
-                </div>
-                <form th:action="@{/login}" method="post" class="form-group">
+                    <form th:action="@{/login}" method="post" class="form-group">
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">
                             Invalid username or password.
@@ -56,6 +55,7 @@
                                value="Log In">
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>

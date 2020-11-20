@@ -63,4 +63,5 @@ public class RegistrationController {
         modelMap.addAttribute("passed", "User Successfully Added");
         return "registration";
     }
+
 }
