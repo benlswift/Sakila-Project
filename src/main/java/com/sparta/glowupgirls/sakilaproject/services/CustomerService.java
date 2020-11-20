@@ -26,6 +26,10 @@ public class CustomerService  {
         return customerRepositories.findCustomerByEmail(email);
     }
 
+    public Customer getCustomerById(int customerId) {
+        return customerRepositories.findCustomerByCustomerId(customerId);
+    }
+
     @Transactional
     public void createCustomer(Customer customer) {
         customerRepositories.save(customer);
@@ -51,5 +55,9 @@ public class CustomerService  {
         if (customerRepositories.findById(id).isPresent())
             return customerRepositories.findById(id).get();
         return null;
+    }
+    @Transactional
+    public void updateCustomer(Customer customer) {
+        customerRepositories.save(customer);
     }
 }
