@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/headerStyles.css}">
+    <meta charset="UTF-8">
+    <title>Updating Account Details</title>
+</head>
+    <body>
+    <div th:include="fragments/header :: header">Error Loading Header</div>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="content">
+                <div class="jumbotron">
+                    <h1 class="display-4" th:text="'Update Account details'"></h1>
+                    <p th:if="${error}" class="error">An error occurred</p>
+                    <p th:if="${passed}" class="alert-success">Account details updated successfully</p>
+                    <form class="form-group" action="#" th:action="@{/update-customer}" th:object="${customer}" method="post">
+                        <p>Email: <input type="text" th:field="*{email}" class="form-control"></p>
+                        <p>First Name: <input type="text" th:field="*{firstName}" class="form-control"></p>
+                        <p>Last Name: <input type="text" th:field="*{lastName}" class="form-control"></p>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:include="fragments/footer :: footer">Footer not found.</div>
+    </body>
+</html>

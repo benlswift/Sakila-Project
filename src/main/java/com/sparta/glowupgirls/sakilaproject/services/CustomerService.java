@@ -25,8 +25,17 @@ public class CustomerService  {
         return customerRepositories.findCustomerByEmail(email);
     }
 
+    public Customer getCustomerById(int customerId) {
+        return customerRepositories.findCustomerByCustomerId(customerId);
+    }
+
     @Transactional
     public void createCustomer(Customer customer) {
+        customerRepositories.save(customer);
+    }
+
+    @Transactional
+    public void updateCustomer(Customer customer) {
         customerRepositories.save(customer);
     }
 }
