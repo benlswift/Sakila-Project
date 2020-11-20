@@ -23,7 +23,7 @@ class AccountControllerTest {
 
     @Test
     @WithMockUser(username ="user1" , password = "pwd",roles = "USER")
-    void currentUser() throws Exception {
+    public void currentUser() throws Exception {
         mockMvc.perform(get("/account")).andDo(print()).andExpect(status().isOk()).andExpect(model().attributeExists());
     }
 
