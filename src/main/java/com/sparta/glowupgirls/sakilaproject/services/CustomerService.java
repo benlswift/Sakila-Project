@@ -51,11 +51,6 @@ public class CustomerService  {
         return customerRepositories.getCustomersByFirstNameAndLastName(fname, lname);
     }
 
-    public Customer getCustomerById(int id) {
-        if (customerRepositories.findById(id).isPresent())
-            return customerRepositories.findById(id).get();
-        return null;
-    }
     @Transactional
     public void updateCustomer(Customer customer) {
         customerRepositories.save(customer);
