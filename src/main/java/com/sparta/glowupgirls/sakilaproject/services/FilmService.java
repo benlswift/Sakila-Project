@@ -1,11 +1,13 @@
 package com.sparta.glowupgirls.sakilaproject.services;
 
+import com.sparta.glowupgirls.sakilaproject.entities.Customer;
 import com.sparta.glowupgirls.sakilaproject.entities.Film;
 import com.sparta.glowupgirls.sakilaproject.entities.Inventory;
 import com.sparta.glowupgirls.sakilaproject.repositories.FilmRepositories;
 import com.sparta.glowupgirls.sakilaproject.repositories.InventoryRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -40,14 +42,8 @@ public class FilmService {
         }
         return films;
     }
-    public List<Film> getFilmByTitle(String title){
-        List<Film> films = new ArrayList<>();
-        for (Film film : getFilms()) {
-            if (film.getTitle().equals(title)){
-                films.add(film);
-            }
-        }
-        return films;
+    public Film getFilmByTitle(String title){
+       return filmRepositories.findFilmByTitle(title);
     }
 
     public boolean isAvailable(int filmId){
@@ -73,6 +69,11 @@ public class FilmService {
         }
         return availableFilms;
 
+    }
+
+    @Transactional
+    public void createFilm(Film film) {
+        filmRepositories.save(film);
     }
 
 

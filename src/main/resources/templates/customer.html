@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/headerStyles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="content">
+            <div class="jumbotron">
+                <h1 class="display-4" th:text="${customer.getFirstName().concat(' ' + customer.getLastName())}"></h1>
+            </div>
+            <div class="address-table">
+                <h4>Address</h4>
+                <table class="table table-dark table-bordered">
+                    <tr>
+                        <td th:text="${address.getAddress()}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${address.getAddress2()}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${address.getDistrict()}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${city.getCity()}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${country.getCountry()}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${address.getPhone()}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${address.getPostalCode()}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="rental-table">
+                <h4>Orders</h4>
+                <table class="table table-dark table-bordered">
+                    <tr>
+                        <th>Film Title</th>
+                        <th>Rental Date</th>
+                        <th>Return Date</th>
+                    </tr>
+                    <tr th:each="rental: ${orders}">
+                        <td th:text="${rental.getFilm().getTitle()}"></td>
+                        <td th:text="${rental.getRental().getRentalDate()}"></td>
+                        <td th:text="${rental.getRental().getReturnDate()}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
