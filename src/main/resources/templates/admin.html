@@ -13,7 +13,7 @@
     <div class="site-wrapper-inner">
         <div class="content">
             <div class="jumbotron">
-                <h1 class="display-4" th:text="${'Welcome, ' + staff.username}">Welcome back, STAFF MEMBER </h1>
+                <h1 class="display-4" th:text="${'Welcome, ' + staff.getUsername}">Welcome back, STAFF MEMBER </h1>
             </div>
             <div class="filter">
                 <form class="form-group" action="/admin">

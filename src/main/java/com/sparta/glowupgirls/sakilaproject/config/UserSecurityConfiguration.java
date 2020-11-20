@@ -1,6 +1,5 @@
 package com.sparta.glowupgirls.sakilaproject.config;
 
-import com.sparta.glowupgirls.sakilaproject.services.MyStaffDetailsService;
 import com.sparta.glowupgirls.sakilaproject.services.myUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
