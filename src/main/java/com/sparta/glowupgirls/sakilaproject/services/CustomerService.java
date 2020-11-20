@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CustomerService  {
@@ -34,6 +35,27 @@ public class CustomerService  {
         customerRepositories.save(customer);
     }
 
+    public List<Customer> findAll() {
+        return (List<Customer>) customerRepositories.findAll();
+    }
+
+    public List<Customer> getCustomersByFirstName(String fname) {
+        return customerRepositories.getCustomersByFirstName(fname);
+    }
+
+    public List<Customer> getCustomersByLastName(String lname) {
+        return customerRepositories.getCustomersByLastName(lname);
+    }
+
+    public List<Customer> getCustomersByFirstNameAndLastName(String fname, String lname) {
+        return customerRepositories.getCustomersByFirstNameAndLastName(fname, lname);
+    }
+
+    public Customer getCustomerById(int id) {
+        if (customerRepositories.findById(id).isPresent())
+            return customerRepositories.findById(id).get();
+        return null;
+    }
     @Transactional
     public void updateCustomer(Customer customer) {
         customerRepositories.save(customer);
