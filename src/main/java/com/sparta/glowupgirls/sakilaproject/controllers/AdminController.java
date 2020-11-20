@@ -64,14 +64,7 @@ public class AdminController {
             Country country = addressService.getCountryByCountryId(city.getCountryId());
 
             List<CustomerOrder> customerOrders = new ArrayList<>();
-            List<Rental> rentals = rentalService.findRentalsByCustomerId(customer.getCustomerId());
-            for (Rental rental: rentals) {
-                Integer invID = rental.getInventoryId();
-                Inventory inventory = inventoryService.findInventoryByInventoryID(invID);
-                Film film = filmService.getFilmByID(inventory.getFilmId());
-                CustomerOrder customerOrder = new CustomerOrder(film, rental);
-                customerOrders.add(customerOrder);
-            }
+            AccountController.getCustomerOrders(customer, customerOrders, rentalService, inventoryService, filmService);
             modelMap.addAttribute("orders", customerOrders);
             modelMap.addAttribute("customer", customer);
             modelMap.addAttribute("address", address);
