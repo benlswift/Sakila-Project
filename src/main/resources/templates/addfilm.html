@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add New Film</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/headerStyles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:include="fragments/header :: header">header not found</div>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="content">
+            <div class="jumbotron">
+                <h1 class="display-4" th:text="'Add New Film'"></h1>
+            </div>
+            <p th:if="${error}" class="error">Film already exists.</p>
+            <p th:if="${passed}" class="alert-success">Film successfully added.</p>
+            <form class="form-group" action="#" th:action="@{/addfilm}" th:object="${film}" method="post">
+                <p>Film Name: <input type="text" th:field="*{title}" class="form-control"></p>
+                <p>Description: <input type="text" th:field="*{description}" class="form-control"></p>
+                <p>Age Rating: <input type="text" th:field="*{rating}" class="form-control"></p>
+<!--                <p>Release Date: <input type="date" th:value="*{releaseYear}" th:field="*{releaseYear}" class="form-control"></p>-->
+                <p>Film Length (minutes): <input type="text" th:field="*{length}" class="form-control"></p>
+                <p>Rental Duration (days): <input type="text" th:field="*{rentalDuration}" class="form-control"></p>
+                <p>Rental Rate: <input type="text" th:field="*{rentalRate}" class="form-control"></p>
+                <p>Replacement Cost: <input type="text" th:field="*{replacementCost}" class="form-control"></p>
+                <p>Special Features: <input type="text" th:field="*{specialFeatures}" class="form-control"></p>
+                <input class="btn-dark btn-lg" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+<div th:include="fragments/footer :: footer">Footer not found.</div>
+</body>
+</html>

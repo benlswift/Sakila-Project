@@ -3,13 +3,13 @@ package com.sparta.glowupgirls.sakilaproject.controllers;
 import com.sparta.glowupgirls.sakilaproject.entities.Customer;
 import com.sparta.glowupgirls.sakilaproject.entities.Film;
 import com.sparta.glowupgirls.sakilaproject.entities.Inventory;
+import com.sparta.glowupgirls.sakilaproject.entities.Staff;
 import com.sparta.glowupgirls.sakilaproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.sql.Timestamp;
@@ -24,15 +24,19 @@ public class FilmController {
     private InventoryService inventoryService;
     private RentalService rentalService;
     private CustomerService customerService;
+    private StaffService staffService;
 
 
     @Autowired
-    public FilmController(CustomerService customerService, RentalService rentalService,FilmService filmService, FilmActorService filmActorService,InventoryService inventoryService) {
+    public FilmController(StaffService staffService,CustomerService customerService,
+                          RentalService rentalService,FilmService filmService,
+                          FilmActorService filmActorService,InventoryService inventoryService) {
         this.filmService = filmService;
         this.filmActorService = filmActorService;
         this.inventoryService = inventoryService;
         this.rentalService = rentalService;
         this.customerService = customerService;
+        this.staffService = staffService;
     }
 
     @GetMapping("/films")
@@ -76,6 +80,26 @@ public class FilmController {
             }
         }
         modelMap.addAttribute("rent","Rented");
-        return "redirect:/films";
+        return "redirect:/account";
+    }
+
+    @GetMapping("/addfilm")
+    public String register(ModelMap modelMap) {
+        modelMap.addAttribute("film", new Film());
+        return "addfilm";
+    }
+
+    @PostMapping("/addfilm")
+    public String register(@ModelAttribute Film film, ModelMap modelMap, Authentication authentication) {
+
+        String staffUsername = authentication.getName();
+        Film checkFilm = filmService.getFilmByTitle(film.getTitle());
+        if (checkFilm != null) {
+            modelMap.addAttribute("error", "film exists");
+            return "addfilm";
+        }
+        filmService.createFilm(film);
+        modelMap.addAttribute("passed", "Film Successfully Added");
+        return "addfilm";
     }
 }
