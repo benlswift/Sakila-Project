@@ -26,6 +26,9 @@ public class CustomerController {
     public String showUpdateForm(Model model, Principal principal) {
         String email = principal.getName();
         Customer customer = customerService.getCustomerByEmail(email);
+        if (customer == null) {
+            return "redirect:/account";
+        }
         model.addAttribute("customer", customer);
         return "update-customer";
     }
